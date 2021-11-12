@@ -14,8 +14,7 @@
 #     name: python3
 # ---
 
-# ## Sean Kelly
-# ## seankell@umich.edu
+# Sean Kelly, seankell@umich.edu
 
 # ## Topics in Pandas
 # **Stats 507, Fall 2021** 
