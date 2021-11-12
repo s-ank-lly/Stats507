@@ -15,9 +15,9 @@ file_exts = ['https://wwwn.cdc.gov/Nchs/Nhanes/2011-2012/DEMO_G.XPT',
              'https://wwwn.cdc.gov/Nchs/Nhanes/2015-2016/DEMO_I.XPT',
              'https://wwwn.cdc.gov/Nchs/Nhanes/2017-2018/DEMO_J.XPT']
 cohorts = ['2011-2012', '2013-2014', '2015-2016', '2017-2018']
-cols_to_keep=['SEQN', 'RIDAGEYR', 'RIDRETH3', 'DMDEDUC2', 'DMDMARTL',
-              'RIDSTATR', 'SDMVPSU', 'SDMVSTRA', 'WTMEC2YR', 'WTINT2YR',
-              'cohort']
+cols_to_keep=['SEQN', 'RIDAGEYR', 'RIAGENDR', 'RIDRETH3', 'DMDEDUC2',
+              'DMDMARTL', 'RIDSTATR', 'SDMVPSU', 'SDMVSTRA', 'WTMEC2YR',
+              'WTINT2YR', 'cohort']
 nhanes_demo_df = pd.DataFrame()
 
 for file, cohort in zip(file_exts, cohorts):
@@ -27,6 +27,7 @@ for file, cohort in zip(file_exts, cohorts):
 
 col_renames = {'SEQN':'id',
                'RIDAGEYR':'age',
+               'RIAGENDR':'gender',
                'RIDRETH3':'race and ethnicity',
                'DMDEDUC2':'education',
                'DMDMARTL':'marital status',
@@ -47,6 +48,7 @@ nhanes_demo_df['2 year interview weights'] = nhanes_demo_df[
 # names are not floats
 col_retypes = {'id':int,
                'age':int,
+               'gender':'Int32',
                'race and ethnicity':'Int32',
                'education':'Int32',
                'marital status':'Int32',
@@ -54,7 +56,8 @@ col_retypes = {'id':int,
                'pseudo-psu variance estimation':'Int32',
                'pseudo-stratum variance estimation':'Int32'}
 nhanes_demo_df = nhanes_demo_df.astype(col_retypes)
-col_retypes = {'race and ethnicity':'category',
+col_retypes = {'gender':'category',
+               'race and ethnicity':'category',
                'education':'category',
                'marital status':'category',
                'interview/examination status':'category',
